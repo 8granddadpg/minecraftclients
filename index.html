@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        body {
+            background: url(https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjl4cWdhNGc4OHI4YWloOHBieXE1c3lsdmgyamp5aTUycWlxaWNobSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/798oH0WDEQnicM4857/giphy.gif) no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        }
+
+        .fade-out {
+            transform: scale(0.8) translateY(-50px);
+            opacity: 0;
+        }
+
+        .loading-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .loading-screen.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loading-bar {
+            width: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            transition: width 2s ease-in-out;
+        }
+
+        .button {
+            display: inline-block;
+            width: 400px;
+            padding: 10px;
+            margin: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: white;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff512f, #dd2476);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.3);
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            width: 100%;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Minecraft Clients</h1>
+        
+        <button class="button" onclick="startLoading('https://astraclient.com/')">Astra Client</button><br>
+        <button class="button" onclick="startLoading('https://play.zelz.net/clients/eagler-wasm/index.html')">Eaglercraft</button><br>
+        <button class="button" onclick="startLoading('https://play.zelz.net/clients/resent403/index.html')">Resent Client</button><br>
+        <button class="button" onclick="startLoading('https://mcraft.fun/')">MCraft</button><br>
+        <button class="button" onclick="startLoading('https://www.minetest.net/')">Minetest</button><br>
+        <button class="button" onclick="startLoading('https://www.blockworldgame.com/')">Blockworldgame</button><br>
+    </div>
+
+    <div class="loading-screen" id="loadingScreen">
+        <h1>Loading...</h1>
+        <div class="loading-bar" id="loadingBar"></div>
+    </div>
+
+    <script>
+        function startLoading(url) {
+            document.querySelector('.content').classList.add('fade-out');
+            document.getElementById('loadingScreen').classList.add('active');
+            setTimeout(() => {
+                document.getElementById('loadingBar').style.width = '100%';
+            }, 100);
+            
+            setTimeout(() => {
+                window.location.href = url;
+            }, 2500);
+        }
+    </script>
+
+    <!-- Footer with "All Rights Reserved" -->
+    <footer>
+        <p>&copy; 2025 All rights reserved.</p>
+    </footer>
+</body>
+</html>
